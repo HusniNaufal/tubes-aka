@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algorithm Complexity: Fibonacci Analysis</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Algorithm Analysis: Fibonacci & Data Statistics</h1>
+        <p>Iterative O(N) vs Recursive O(2^N)</p>
+      </header>
+
+      <!-- Upload Section -->
+      <div class="card">
+        <div class="card-header">1. Data Input</div>
+        <div class="upload-area">
+          <p>Drag & Drop <strong>.xlsx</strong> file</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted)">(Support Multi-Sheet & Multi-Modul)</p>
+          <input type="file" id="fileInput" accept=".xlsx" />
+        </div>
+        <p id="error-msg"></p>
+        <p id="file-info" style="margin-top: 10px; color: var(--primary); display: none"></p>
+      </div>
+
+      <!-- Dashboard -->
+      <div id="dashboard" class="hidden">
+        <div id="warning-limit" class="warning-box">
+          <strong>⚠️ Recursive Limit Applied:</strong>
+          Total Data dari semua sheet: <span id="real-count">0</span> baris.
+          <br />
+          Demi keamanan browser, perhitungan Rekursif tetap dijalankan namun <strong>dibatasi pada N=25</strong>. Iteratif tetap menghitung penuh sesuai jumlah data.
+        </div>
+
+        <!-- NEW: Data Analysis Results (TABLE FORMAT) -->
+        <div class="card">
+          <div class="card-header">
+            <span>2. Statistik Data (Juara Umum & Kelas)</span>
+            <span class="badge" id="total-data-badge">0 Data</span>
+          </div>
+
+          <!-- Table 1: Max Score Student (Average across modules) -->
+          <div class="section-title">🏆 Juara Umum (Rata-Rata Tertinggi Semua Modul)</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Rata-Rata Akhir</th>
+              </tr>
+            </thead>
+            <tbody id="table-max-body">
+              <!-- JS Injected -->
+            </tbody>
+          </table>
+
+          <!-- Table 2: Best Class Average -->
+          <div class="section-title" style="margin-top: 1.5rem">📊 Kelas dengan Rata-Rata Tertinggi</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Kelas</th>
+                <th>Rata-Rata Nilai Kelas</th>
+              </tr>
+            </thead>
+            <tbody id="table-avg-body">
+              <!-- JS Injected -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Performance Analysis -->
+        <div class="card">
+          <div class="card-header">3. Metrik Performa (Running Time)</div>
+
+          <!-- Table Only -->
+          <div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Input Processed (N)</th>
+                  <th>Exec Time (ms)</th>
+                  <th>Complexity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Iterative (Looping)</td>
+                  <td id="n-iter">0</td>
+                  <td id="time-iter">0.0000000</td>
+                  <td><strong>O(N)</strong></td>
+                </tr>
+                <tr style="background-color: #fef2f2">
+                  <td>Recursive (2 Cabang)</td>
+                  <td id="n-rec">0</td>
+                  <td id="time-rec" style="color: var(--danger); font-weight: bold">0.0000000</td>
+                  <td><strong>O(2^N)</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Chart -->
+          <div class="chart-section">
+            <h3 style="text-align: center; margin-bottom: 1rem">Visualisasi Grafik: O(N) vs O(2^N)</h3>
+            <div class="chart-container">
+              <canvas id="perfChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="algorithms.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
